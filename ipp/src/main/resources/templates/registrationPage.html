@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" th:href="@{/css/jobsearchstyle.css}">
+<title>NC Internal Job Search</title>
+</head>
+<body>
+
+<div class="pageheader" th:object="${userProfile}" style="background-color:#183147;">
+<img src="/images/newbanner.png" class="logoborder"   style="width:100%; "/>    
+</div> 
+<div class="container" th:object="${userRegistration}" style="width:700px;height:280px;background-color:white;position:relative;top:30px;" novalidate>
+
+
+  <img src="/images/NC_Logo_1.jpg" style="width:100%;width:250px;height:80px;position:absolute;right:10px"/>
+  <h2>Registration Page</h2>
+		Please enter your details below
+
+		<form action="/ncjobsearch/registernow" method="post"
+			enctype="multipart/form-data" novalidate>
+
+
+			<table class="table">
+				<tr>
+					<td>
+						<div class="form-group">
+							<label for="fullName">Full Name:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									name="fullName" class="form-control" id="usr_fullName"
+									th:value="${userRegistration.fullName}" required size="4">
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('fullName')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+					<td>
+						<div class="form-group">
+							<label for="eMail">eMail Id:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-envelope"></i></span> <input type="text"
+									name="eMail" class="form-control" id="usr_eMail"
+									th:value="${userRegistration.eMail}" required size="10">
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('eMail')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>
+
+						<div class="form-group">
+							<label for="phoneNumber">Phone No:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+									name="phoneNumber" class="form-control" id="usr_phoneNumber"
+									th:value="${userRegistration.phoneNumber}" required>
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('phoneNumber')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+					<td>
+						<div class="form-group">
+							<label for="ncId">NC Id:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									name="ncId" class="form-control" id="usr_ncId"
+									th:value="${userRegistration.ncId}" required>
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('ncId')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+				</tr>
+
+
+
+
+
+
+				<tr>
+					<td>
+						<div class="form-group">
+							<label for="password">Password:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-lock"></i></span> <input type="password"
+									name="password" class="form-control" id="usr_pwd"
+									th:value="${userRegistration.password}" required>
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('password')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+					<td>
+						<div class="form-group">
+							<label for="confirmPassword">Confirm Password:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-lock"></i></span> <input type="password"
+									name="confirmPassword" class="form-control" id="usr_confPwd"
+									th:value="${userRegistration.confirmPassword}" required>
+							</div>
+							<span class="errorMessageForm"  th:each="e : ${#fields.errors('confirmPassword')}"  th:text="${e}" ></span> 
+						</div>
+
+					</td>
+				</tr>
+
+
+
+
+
+
+				<tr>
+					<td>
+
+						<div class="form-group">
+							<label for="currentRole">Current Role:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-th-large"></i></span> <select
+									name="currentRole" class="form-control" id="currentRole"
+									th:value="${userRegistration.currentRole}" required>
+									<option th:each="role : ${allRoles}" th:text="${role}"
+										th:value="${role}"></option>
+								</select>
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('currentRole')}"  th:text="${e}" ></span> 
+						</div>
+
+					</td>
+
+					<td>
+						<div class="form-group">
+							<label for="currentProject">Current Project:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-list-alt"></i></span> <select
+									name="currentProject" class="form-control"
+									id="usr_currentProject"
+									th:value="${userRegistration.currentProject}">
+									<option th:each="project : ${allProjects}" th:text="${project}"
+										th:value="${project}"></option>
+								</select>
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('currentProject')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+				</tr>
+
+
+
+
+				<tr>
+					<td>
+
+						<div class="form-group">
+							<label for="lwdCurrProject">Current Project Last Working Date:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-hand-right"></i></span> <input type="date"
+									name="lwdCurrProject" class="form-control"
+									id="usr_lwdCurrProject"
+									th:value="${userRegistration.lwdCurrProject}">
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('lwdCurrProject')}"  th:text="${e}" ></span> 
+						</div>
+
+					</td>
+
+					<td>
+						<div class="form-group">
+							<label for="highestEducationDetails">Highest
+								Qualification:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-education"></i></span> <select
+									name="highestEducationDetails" class="form-control"
+									id="usr_highestEducationDetails"
+									th:value="${userRegistration.highestEducationDetails}" required>
+									<option th:each="qualification : ${allQualifications}"
+										th:text="${qualification}" th:value="${qualification}">
+									</option>
+								</select>
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('highestEducationDetails')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<div class="form-group">
+							<label for="skills">Skills:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-folder-open"></i></span> <select
+									name="skills" class="form-control" id="usr_skills"
+									th:value="${userRegistration.skills}" multiple="multiple"
+									required>
+									<option th:each="skill : ${allSkills}" th:text="${skill}"
+										th:value="${skill}"></option>
+								</select>
+							</div>
+							<span  class="errorMessageForm" th:each="e : ${#fields.errors('skills')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+
+
+
+				</tr>
+
+				<tr>
+
+					<td>
+						<div class="form-group">
+							<label for="managerId">Manager eMail Id:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									name="managerId" class="form-control" id="usr_managerId"
+									th:value="${userRegistration.managerId}" required>
+							</div>
+						</div>
+
+					</td>
+					<td>
+						<div class="form-group">
+							<label for="workExperience">Work Experience (in years):</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-lock"></i></span> <input type="text"
+									name="workExperience" class="form-control"
+									id="usr_workExperience"
+									th:value="${userRegistration.workExperience}" required>
+							</div>
+							<span class="errorMessageForm" th:each="e : ${#fields.errors('workExperience')}"  th:text="${e}" ></span> 
+						</div>
+					</td>
+				</tr>
+				<tr>
+
+
+					<td colspan="2">
+						<div class="form-group">
+							<label for="managerId">Upload Resume:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-paperclip"></i></span> <input type="file"
+									name="uploadedResume" class="form-control" id="usr_managerId">
+							</div>
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td colspan="2">
+						<div class="form-group">
+							<input type="checkbox" name="consent" id="usr_consent">
+							Consent : I provide consent to use this information to get me a
+							project within NC.
+						</div>
+
+						<div class="form-group">
+							<input type="checkbox" name="privacyPolicy" id="usr_privacy">
+							Privacy Policy : I agree with the terms and conditions of privacy
+							policy of NC.
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<button type="submit" class="btn btn-warning">Register</button>
+						<button type="cancel" formAction="/ncjobsearch" formmethod="get"
+							class="btn btn-secondary">Cancel</button>
+					<td>
+				</tr>
+			</table>
+			
+			
+		</form>
+	</div>
+</body>
+</html>

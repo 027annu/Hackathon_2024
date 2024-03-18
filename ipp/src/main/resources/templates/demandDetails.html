@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>NC Job Portal</title>
+
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+ <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" ></script>
+ <script th:src="@{/js/myScript.js}" ></script>
+ <script th:src="@{/js/Job.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/jobsearchstyle.css}">
+</head>
+
+<body>
+
+<div th:include=" commonHeader.html"></div>
+
+<div class="container ">
+	
+	<h1>Demand Detail</h1>
+	<p>Details regarding current demand, please read this page carefully before applying for the demand</p>
+	<form action="/applyJob" method="post" novalidate>
+
+
+		<table id="myDataTable" class="table table-striped">
+
+			<tbody>
+
+				<tr>
+					<td><span>Job Id:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span> <input id="demandId"
+									th:value="${demand.demandId}" name="demandId"
+									style="border: snow;" readonly>
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td><span>Job Title:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<p id="demandTitle" name="demandTitle"
+									th:text="${demand.demandTitle}">
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td><span>Domain:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span> <input id="domain"
+									name="domain" th:value="${demand.domain}" style="border: snow;"
+									readonly>
+							</div>
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td><span>Responsibility:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<p id="responsibility" name="responsibility"
+									th:text="${demand.responsibility}">
+							</div>
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td><span>Project Location:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<p id="projectName" name="projectName"
+									th:text="${demand.projectName}">
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td><span>Min Exp Required:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<p id="experience" name="experience"
+									th:text="${demand.experience}">
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td><span>Creation Date:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<p id="creationDate" name="creationDate"
+									th:text="${demand.creationDate}">
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td><span>Skills:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<p id="Skills" name="Skills" th:text="${demand.Skills}">
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td><span>Upload Resume:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<div class="mb-0" style="width: 300px;">
+									<label for="formFile" class="form-label"></label> <input
+										class="form-control" type="file" id="formFile">
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td><span>Upload Approval:</span></td>
+					<td>
+						<div class="form-group ">
+							<div class="input-group">
+								<span class="input-group"></span>
+								<div class="mb-0" style="width: 300px;">
+									<label for="formFileMail" class="form-label"></label> <input required
+										class="form-control" type="file" id="formFileMail">
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr style="display: none">
+					<td><span>createdBy:</span></td>
+					<td>
+						<div class="col-2">
+							<input id="empId" th:value="${demand.createdBy}" name="empId" 
+								style="border: snow;">
+						</div>
+					</td>
+				</tr>
+
+
+				<tr style="display: none">
+					<td><span>jobTitle:</span></td>
+					<td>
+						<div class="col-2">
+							<input id="jobTitle" th:value="${demand.demandTitle}"
+								name="jobTitle" style="border: snow;">
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+				  <td>
+					<input type="Submit" value="Apply" class="btn btn-success" style="margin-top: 10px;">
+					<input type="Submit" formAction="/ncjobsearch/fetchJobs" formMethod="get" value="Cancel" class="btn btn-secondary"  style="margin-top: 10px;position: absolute;">
+				  </td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="alert alert-danger" th:text="${errorMessage}" th:style="${errorMessage} ? 'display:block;':'display:none;' "></div>
+
+	</form>
+</div>
+
+</body>
+</html>

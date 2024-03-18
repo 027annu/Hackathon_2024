@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/jobsearchstyle.css}">
+<title>NC Internal Job Search</title>
+</head>
+
+<body style="background-image:url('/images/univershe.jpg');background-repeat: no-repeat;">
+<div class="pageheader" th:object="${userProfile}" style="background-color:#183147;">
+<img src="/images/newbanner.png" class="logoborder"   style="width:100%; "/>    
+</div> 
+
+
+
+<div class="container" th:object="${userlogin}" style="width:700px;height:280px;background-color:white;position:relative;top:100px;">
+
+  <img src="/images/NC_Logo_1.jpg" style="width:100%;width:250px;height:80px;position:absolute;right:10px"/>
+  <h2>Login Here</h2> 
+  
+  <form  action="/ncjobsearch/internalprojectportal" method="post">
+    <div class="form-group">
+      <label for="usr">User Id:</label>
+      <div class="input-group">
+	      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+	      <input type="text" name="ncidOrEmail" class="form-control" id="usr_ncidOrEmail" th:value="${userlogin.ncidOrEmail}">
+      </div>
+          
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <div class="input-group">
+	      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	      <input type="password"  name="password" class="form-control" id="usr_pwd" th:value="${userlogin.password}">	      
+	  </div>
+    </div>
+    <button type="submit" class="btn btn-success" title="Click here to login">Login</button>
+    <button formaction="/ncjobsearch/registration" type="submit" class="btn btn-info" style="float:right" title="If you want to register click here">Register</button>  	
+  </form>
+ 
+ <br>
+  <div> 
+  	<div class="alert alert-danger" th:text="${loginError}" th:style="${loginError} ? 'display:block;':'display:none;'" ></div>
+  	<div class="alert alert-warning" th:style="${#fields.hasErrors('ncidOrEmail') || #fields.hasErrors('password')}  ? 'display:block;' : 'display:none;'"> 
+  			<span th:each="e : ${#fields.errors('ncidOrEmail')}"  th:text="${e}" ></span> 
+  			<span th:each="e : ${#fields.errors('password')}" th:text="${e}" /></span> 
+  	</div>
+  	<div class="alert alert-warning" th:text="${loginSuggestion}" th:style="${loginSuggestion} ? 'display:block;':'display:none;'" ></div>
+  	<div class="alert alert-success" th:text="${userCanLoginNowMsg}" th:style="${userCanLoginNowMsg}? 'display:block;':'display:none;'" ></div>
+  </div>
+</div>
+ 
+</body>
+</html>

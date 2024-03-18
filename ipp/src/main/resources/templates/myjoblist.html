@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+ <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" ></script>
+ <script th:src="@{/js/myScript.js}" ></script>
+ <script th:src="@{/js/Job.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/jobsearchstyle.css}">
+</head>
+
+<body>
+<div th:include="commonHeader.html"></div>
+
+
+<div class="container">
+
+<h1>My Job Lists</h1>
+<p>This page contains all the jobs/demands created by currently logged-in user </p>
+    <table id="myDataTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Demand Title</th>
+            <th scope="col">Demand Id</th>
+            <th scope="col">Status</th>
+            <th scope="col">Domain</th>
+            <th scope="col">No of Applicants</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="j : ${demands}">
+            <td th:text="${j.demandTitle}"></td>
+            <td th:text="${j.demandId}"></td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" th:text="${j.status}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{'/cancelapplication/'+${j.demandId}+'/Fulfilled'}">Fulfilled</a></li>
+                        <li><a class="dropdown-item" th:href="@{'/cancelapplication/'+${j.demandId}+'/Canceled'}">Canceled</a></li>
+                    </ul>
+                </div>
+            </td>
+            <td th:text="${j.Domain}"></td>
+            <td><a class="btn btn-link" type="button" th:href="@{/ncjobsearch/{id}(id=${j.demandId})}" th:text="${j.noOfApplicant}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

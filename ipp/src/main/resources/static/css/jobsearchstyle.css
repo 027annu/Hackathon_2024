@@ -1,0 +1,44 @@
+
+
+.dropDownheader {
+
+	font-weight:900;
+}
+
+
+.dropdown-by-default{
+	display:none;
+}
+
+
+.field-value-disabled {
+	disabled:"disabled";
+}
+
+td {
+	padding:40px;
+}
+
+
+.pageheader{
+
+	border-bottom : 5px solid orange;
+	color:grey;
+}
+
+.active{
+
+}
+
+
+body {
+	
+	 overflow-y: scroll;
+}
+
+
+
+.errorMessageForm {
+color:red;padding:5px;
+	}
+

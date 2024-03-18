@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div  class ="container" th:object="${userProfile}">
+	<h1>Current Demands</h1>
+	<p>Current demands are listed below, please check and apply</p>
+    <table id="myDataTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Job Title</th>
+            <th scope="col">Project name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created By</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="j : ${demands}">
+            <td><a class="btn btn-link" type="button" th:href="@{/ncjobsearch/getJob/{id}(id=${j.demandId})}" th:text="${j.demandTitle}"></a>
+            </td>
+            <td th:text="${j.ProjectName}"></td>
+            <td th:text="${j.projectLocation}"></td>
+            <td th:text="${j.status}"></td>
+            <!--     <td>
+                     <a type="button" class="btn btn-link">Resume</a>
+                 </td>-->
+            <td th:text="${j.createdBy}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

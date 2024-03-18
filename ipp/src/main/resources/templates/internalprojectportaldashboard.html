@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>NC Job Portal</title>
+
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+ <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" ></script>
+ <script th:src="@{/js/myScript.js}" ></script>
+ <script th:src="@{/js/Job.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/jobsearchstyle.css}">
+</head>
+
+<body>
+
+<div th:include=" commonHeader.html"></div>
+
+
+<!-- ===============================================  Current Demands Starts ====================================== -->
+<div id="currentDemandsView" >
+  <div th:include="CurrentDemand.html"></div>
+</div>
+<!-- ===============================================   Current Demands View Ends ====================================== -->
+
+
+
+<!-- ===============================================  Check My Status View Starts ====================================== -->
+<div id="checkMyStatusView" style="display:none;">
+<h1>Check My Status</h1>
+</div>
+<!-- ===============================================  Check My Status View Ends ====================================== -->
+
+
+
+
+
+</body>
+</html>

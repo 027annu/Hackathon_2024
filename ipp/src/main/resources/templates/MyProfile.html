@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+ <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" ></script>
+ <script th:src="@{/js/myScript.js}" ></script>
+ <script th:src="@{/js/Job.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/jobsearchstyle.css}">
+</head>
+
+<body>
+<div th:include="commonHeader.html"></div>
+
+
+<div class ="container container-fluid"> 
+
+<h1>My Profile</h1>
+<p>Edit or View your profile details</p>
+<!-- ****************** Profile Read Only Starts -->
+<div id="profileReadOnly" style="width:1200px;" >
+
+
+ <button type="submit" class="btn btn-info navbar-btn" onclick="functionEditProfile()">Edit Profile</button>
+<br><br>
+	<form>
+		<table class="table">
+			<tr>
+				<td>
+					<span class="dropDownheader" >Full Name : </span><span  class="dropValues" th:text="${userProfile.fullName}"></span>		 
+				</td>  
+				<td>				
+					<span class="dropDownheader" >eMail Id : </span><span  class="dropValues" th:text="${userProfile.eMail}"></span>		 
+				</td>
+			</tr>			
+			
+			<tr>
+				<td>
+					<span class="dropDownheader" >Phone No : </span><span  class="dropValues" th:text="${userProfile.phoneNumber}"></span>		 
+				</td>
+				<td>
+					<span class="dropDownheader" >NC Id : </span><span  class="dropValues" th:text="${userProfile.ncId}"></span>		 
+				</td>			
+			</tr>
+			
+			<tr>
+			 <td>
+			 		<span class="dropDownheader" >Current Role : </span><span  id="currentRole" class="dropValues" th:text="${userProfile.currentRole}"></span>
+			 </td>
+			 <td>
+					<span class="dropDownheader" >Current Project : </span><span id="currentProject" class="dropValues" th:text="${userProfile.currentProject}"></span>
+			 
+			 </td>
+			</tr>
+				<td>
+				    <span class="dropDownheader" >Work Experience (in years) : </span><span  id="workExperience" class="dropValues" th:text="${userProfile.workExperience}"></span>		 
+				</td>				
+				<td>
+					<span class="dropDownheader"  >Skills : </span><span id="skills" class="dropValues" th:text="${userProfile.skills}"></span>		 
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<span class="dropDownheader" >Current Project LWD : </span><span  class="dropValues" th:text="${userProfile.lwdCurrProject}"></span>		 
+				</td>
+				
+				<td>
+					<span class="dropDownheader" >Highest Qualification : </span><span  class="dropValues" th:text="${userProfile.highestEducationDetails}"></span>		 
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+				<span class="dropDownheader" >Manager Id : </span><span  class="dropValues" th:text="${userProfile.managerId}"></span>		 
+				</td>
+				<td>
+				 	 <span class="dropDownheader" >View your Resume : </span><span  class="dropValues"> <a th:href="${userProfile.resumePath}" download > Download </a> </span>		 					 
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>	
+<!-- ****************** Profile Read Only Ends -->
+
+<!-- ****************** Profile Editable Only Starts -->
+<div id="profileUpdatable" style="display:none;">
+	
+	<form action="/ncjobsearch/updateProfile" method="post" enctype="multipart/form-data">
+	   	<button type="submit"   class="btn btn-danger navbar-btn">Save</button>
+   		<button  class="btn btn-alert navbar-btn" onclick="functionCancelEditProfile()">Cancel</button>
+   
+		<table class="table">
+			<tr>
+				<td>			
+				    <div class="form-group ">
+				      <label for="fullName">Full Name :</label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					      <input type="text" name="fullName" class="form-control always-disabled" id="usr_fullName" readonly th:value="${userProfile.fullName}"  size="4">
+				      </div>         
+				    </div>
+				</td>  
+				<td>
+				 <div class="form-group ">
+				      <label for="eMail">eMail Id : </label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+					     <input type="text" name="eMail" class="form-control always-disabled" id="usr_eMail" th:value="${userProfile.eMail}" readonly size="10">
+				      </div>         
+				    </div>
+				</td>
+					<span th:each="e : ${#fields.errors('fullName')}"  th:text="${e}" ></span> <span th:each="e : ${#fields.errors('eMail')}"  th:text="${e}" ></span> 
+						
+			</tr>			
+			
+			<tr>
+				<td>
+				    <div class="form-group ">
+				      <label for="eMail">Phone No :</label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+					      <input type="text" name="phoneNumber" class="form-control" id="usr_phoneNumber" th:value="${userProfile.phoneNumber}" >
+				      </div>         
+				    </div>
+				</td>
+				<td>
+					 <div class="form-group ">
+				      <label for="ncId">NC Id :</label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					      <input type="text" name="ncId" class="form-control " id="usr_ncId" th:value="${userProfile.ncId}" readonly>
+				      </div>         
+   					 </div>
+				</td>			
+			</tr>
+			
+			<tr>
+			 <td>
+			 	    <div class="form-group ">
+				      <label for="currentRole">Current Role : </label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+					      <select  name="currentRole" class="form-control" id="currentRoleSel" th:value="${userProfile.lwdCurrProject}" required>	 
+					        <option th:each="role : ${allRoles}"  th:text="${role}" th:value="${role}"></option>
+					      </select>      
+					  </div>
+				    </div>
+			 </td>
+			 <td>
+			     <div class="form-group ">
+			      <label for="currentProject">Current Project : </label>
+			      <div class="input-group">
+				      <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+				      <select  name="currentProject" class="form-control" id="usr_currentProject"  >
+				      	<option th:each="project : ${allProjects}" th:text="${project}" th:value="${project}" > </option>
+				      </select>	      
+				  </div>
+			    </div>
+			 
+			 </td>
+			</tr>
+				<td>
+				 <div class="form-group ">
+			      <label for="workExperience">Work Experience (in years) :</label>
+			      <div class="input-group">
+				      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+				      <input type="text"  name="workExperience" class="form-control" id="usr_workExperience" th:value="${userProfile.workExperience}" required>	      
+				  </div>
+				 </div>
+				</td>
+				
+				<td>
+				 <div class="form-group  ">
+			      <label for="skills">Skills:</label>
+			      <div class="input-group">
+				      <span class="input-group-addon"><i class="glyphicon glyphicon-folder-open"></i></span>
+				      <select name="skills" class="form-control" id="usr_skills" th:value="${userProfile.skills}" multiple="multiple" required>	     
+				      	<option th:each="skill : ${allSkills}" th:text="${skill}" th:value="${skill}"> </option>
+				      </select> 
+				  </div>
+				 </div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+				     <div class="form-group  ">
+				      <label for="lwdCurrProject">Current Project LWD : </label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span>
+					      <input type="date"  name="lwdCurrProject" class="form-control" id="usr_lwdCurrProject" th:value="${userProfile.lwdCurrProject}" >	      
+					  </div>
+					 </div>
+				</td>
+				
+				<td>
+				     <div class="form-group ">
+				      <label for="highestEducationDetails">Highest Qualification : </label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+					      <select name="highestEducationDetails" class="form-control" id="usr_highestEducationDetails" th:value="${userProfile.highestEducationDetails}" required>	
+					      	<option th:each="qualification : ${allQualifications}" th:text="${qualification}" th:value="${qualification}"> </option>
+						</select>      
+					  </div>
+					 </div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					 <div class="form-group ">
+				      <label for="managerId">Manager Id : </label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					      <input type="text"  name="managerId" class="form-control" id="usr_managerId" th:value="${userProfile.managerId}" readonly required>	      
+					  </div>
+					 </div>
+				</td>
+				<td>
+					 <div class="form-group ">
+				      <label for="managerId">Upload Resume : </label>
+				      <div class="input-group">
+					      <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
+					      <input type="file"  name="uploadedResume" class="form-control" id="usr_managerId" >	      
+					  </div>
+					 </div>					 
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	
+</div>	
+<!-- ****************** Profile Editable Only Ends -->
+</div>
+</body>
+</html>

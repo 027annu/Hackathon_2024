@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Error Page</title>
+</head>
+<body>
+
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+ <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" ></script>
+ <script th:src="@{/js/myScript.js}" ></script>
+ <script th:src="@{/js/Job.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/jobsearchstyle.css}">
+</head>
+
+<body style="width:100%" >
+
+<div class="pageheader" th:object="${userProfile}" style="background-color:#183147;">
+<img src="/images/logo.png" class="logoborder"   style="width:40%; height:110px"/>    
+</div> 
+<div class="container">
+<h1>Error Occurred</h1>
+<h2>Ooops something went wrong, please try after some time, if issue persists please contact administrator.  </h2>
+<p>You may use following link to go to login page again : <a href="/ncjobsearch/" > Click Me </a> </p>
+
+<img src= "/images/error.png" style="width:500px; height:400px;"/> 
+ 
+
+</div>
+</body>
+</html>
